@@ -1,17 +1,12 @@
 <?php
 
-$params = require __DIR__ . '/params.php';
-$db = require __DIR__ . '/db.php';
+use yii\helpers\ArrayHelper;
 
-$config = [
-    'id' => 'basic-console',
-    'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+$params = require __DIR__ . '/params.php';
+$result = include __DIR__ . '/common.php';
+
+$result = ArrayHelper::merge($result, [
     'controllerNamespace' => 'app\commands',
-    'aliases' => [
-        '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
-    ],
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -24,9 +19,8 @@ $config = [
                 ],
             ],
         ],
-        'db' => $db,
     ],
-    'params' => $params,
+
     /*
     'controllerMap' => [
         'fixture' => [ // Fixture generation command line.
@@ -34,14 +28,14 @@ $config = [
         ],
     ],
     */
-];
+]);
 
-if (YII_ENV_DEV) {
+//if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment
-    $config['bootstrap'][] = 'gii';
-    $config['modules']['gii'] = [
-        'class' => 'yii\gii\Module',
-    ];
-}
+//    $config['bootstrap'][] = 'gii';
+//    $config['modules']['gii'] = [
+//        'class' => 'yii\gii\Module',
+//    ];
+//}
 
-return $config;
+return $result;

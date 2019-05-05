@@ -31,4 +31,7 @@ tests/_support/_generated
 
 #vagrant folder
 /.vagrant
-/.metadata/
+
+/config/local.php
+/config/env.php
+/config/debug
